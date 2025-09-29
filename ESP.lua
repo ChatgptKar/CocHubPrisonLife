@@ -5,7 +5,6 @@ return function(Window, Rayfield)
         Content = "ESP injected successfully!",
         Duration = 5
     })
-end
 
 
 
