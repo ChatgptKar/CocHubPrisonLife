@@ -7,7 +7,8 @@ Rayfield:Notify({
 -- Usage in Coc Hub:
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/ChatgptKar/CocHubPrisonLife/main/ESP.lua"))()(Window)
 
-return function(Window)
+return function(Window, Rayfield)
+
 
     local Players = game:GetService("Players")
     local RunService = game:GetService("RunService")
