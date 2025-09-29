@@ -1,3 +1,8 @@
+Rayfield:Notify({
+    Title = "ESP Module",
+    Content = "ESP.lua loaded successfully!",
+    Duration = 4
+})
 -- WA Universal ESP for Rayfield (Module)
 -- Usage in Coc Hub:
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/ChatgptKar/CocHubPrisonLife/main/ESP.lua"))()(Window)
