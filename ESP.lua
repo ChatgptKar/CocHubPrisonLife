@@ -1,22 +1,27 @@
+-- ESP Module for Coc Hub
 return function(Window, Rayfield)
-    -- when you need to notify:
+
+    --------------------------------------------------------
+    -- Notify that module loaded
+    --------------------------------------------------------
     Rayfield:Notify({
         Title = "ESP Loaded",
         Content = "ESP injected successfully!",
         Duration = 5
     })
 
-
-
+    --------------------------------------------------------
+    -- Services
+    --------------------------------------------------------
     local Players = game:GetService("Players")
     local RunService = game:GetService("RunService")
     local Camera = workspace.CurrentCamera
     local UserInputService = game:GetService("UserInputService")
     local LocalPlayer = Players.LocalPlayer
 
-    -- =====================================================
+    --------------------------------------------------------
     -- SETTINGS
-    -- =====================================================
+    --------------------------------------------------------
     local Settings = {
         Enabled = false,
         TeamCheck = false,
@@ -48,9 +53,9 @@ return function(Window, Rayfield)
     local Drawings = { ESP = {} }
     local Highlights = {}
 
-    -- =====================================================
+    --------------------------------------------------------
     -- UTILITIES
-    -- =====================================================
+    --------------------------------------------------------
     local function GetTracerOrigin()
         if Settings.TracerOrigin == "Bottom" then
             return Vector2.new(Camera.ViewportSize.X/2, Camera.ViewportSize.Y)
@@ -82,9 +87,9 @@ return function(Window, Rayfield)
         end
     end
 
-    -- =====================================================
+    --------------------------------------------------------
     -- CREATE ESP
-    -- =====================================================
+    --------------------------------------------------------
     local function CreateESP(player)
         if player == LocalPlayer then return end
 
@@ -138,9 +143,9 @@ return function(Window, Rayfield)
         }
     end
 
-    -- =====================================================
+    --------------------------------------------------------
     -- UPDATE ESP
-    -- =====================================================
+    --------------------------------------------------------
     local function UpdateESP(player)
         local esp = Drawings.ESP[player]
         if not esp then return end
@@ -246,9 +251,9 @@ return function(Window, Rayfield)
         end
     end
 
-    -- =====================================================
+    --------------------------------------------------------
     -- LOOP
-    -- =====================================================
+    --------------------------------------------------------
     RunService.RenderStepped:Connect(function()
         if not Settings.Enabled then return end
         for _, player in ipairs(Players:GetPlayers()) do
@@ -260,9 +265,9 @@ return function(Window, Rayfield)
     end)
     Players.PlayerRemoving:Connect(RemoveESP)
 
-    -- =====================================================
+    --------------------------------------------------------
     -- RAYFIELD UI
-    -- =====================================================
+    --------------------------------------------------------
     local ESPTab = Window:CreateTab("ESP", 4483362458)
     ESPTab:CreateSection("Universal ESP")
 
@@ -283,5 +288,8 @@ return function(Window, Rayfield)
     ESPTab:CreateSlider({ Name="Chams Transparency", Range={0,1}, Increment=0.05, CurrentValue=0.5, Callback=function(v) Settings.ChamsTransparency=v end })
     ESPTab:CreateSlider({ Name="Max Distance", Range={100,5000}, Increment=100, CurrentValue=1000, Callback=function(v) Settings.MaxDistance=v end })
 
+    --------------------------------------------------------
+    -- Return table
+    --------------------------------------------------------
     return { Settings = Settings, Colors = Colors }
 end
